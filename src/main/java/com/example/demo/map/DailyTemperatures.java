@@ -13,21 +13,17 @@ public class DailyTemperatures {
         int[] retval = new int[temperatures.length];
 
         for (int i = 0; i < temperatures.length; i++) {
-            EntryOfArray indexes = map.get(temperatures[i]);
+            EntryOfArray indexes = map.get(temperatures[temperatures.length - i - 1]);
 
             if (indexes == null)
-                indexes = new EntryOfArray(temperatures[i], Arrays.asList(i));
-            indexes.indexes.add(i); // adding the index where this temperature occurred.
-            map.put(temperatures[i], indexes);
-        }
-
-        for (int i = 0; i < temperatures.length; i++) {
-            int temperature = temperatures[i];
-            int space = findNextTemp(temperature, i);
+                indexes = new EntryOfArray(temperatures[temperatures.length - i - 1], Arrays.asList(temperatures.length - i - 1));
+            indexes.indexes.add(temperatures.length - i - 1); // adding the index where this temperature occurred.
+            map.put(temperatures[temperatures.length - i - 1], indexes);
+            int space = findNextTemp(temperatures[temperatures.length - i - 1], temperatures.length - i - 1);
             if (space == -1) {
-                retval[i] = 0;
+                retval[temperatures.length - i - 1] = 0;
             } else
-                retval[i] = space;
+                retval[temperatures.length - i - 1] = space;
         }
 
         return retval;

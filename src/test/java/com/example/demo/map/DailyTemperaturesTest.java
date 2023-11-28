@@ -6,6 +6,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.test.context.TestPropertySource;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
@@ -32,21 +33,50 @@ class DailyTemperaturesTest {
     }
 
     @Test
-    void setDailyTemperaturesLarge() throws Exception {
-        Properties configProps = new Properties();
-        InputStream iStream = new ClassPathResource("application-test.properties").getInputStream();
-        configProps.load(iStream);
+    void setDailyTemperaturesLarge() {
+        try {
+            Properties configProps = new Properties();
+            InputStream iStream = new ClassPathResource("application-test.properties").getInputStream();
+            configProps.load(iStream);
 
 
-        String[] strings = configProps.get("data").toString().split(",");
-        List<Integer> integerList = Arrays.stream(strings).map(x -> {
-            return Integer.parseInt(x.trim());
-        }).collect(Collectors.toList());
+            String[] strings = configProps.get("data").toString().split(",");
+            List<Integer> integerList = Arrays.stream(strings).map(x -> {
+                return Integer.parseInt(x.trim());
+            }).collect(Collectors.toList());
 
-        int[] a = new int[integerList.size()];
-        for (int i = 0; i < integerList.size(); i++) {
-            a[i] = integerList.get(i);
+            int[] a = new int[integerList.size()];
+            for (int i = 0; i < integerList.size(); i++) {
+                a[i] = integerList.get(i);
+            }
+            int[] result = dailyTemperatures.dailyTemperatures(a);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        int[] result = dailyTemperatures.dailyTemperatures(a);
+
+    }
+
+    @Test
+    void setDailyTemperaturesLargeRepeat() {
+        try {
+            Properties configProps = new Properties();
+            InputStream iStream = new ClassPathResource("application-test.properties").getInputStream();
+            configProps.load(iStream);
+
+
+            String[] strings = configProps.get("datatwo").toString().split(",");
+            List<Integer> integerList = Arrays.stream(strings).map(x -> {
+                return Integer.parseInt(x.trim());
+            }).collect(Collectors.toList());
+
+            int[] a = new int[integerList.size()];
+            for (int i = 0; i < integerList.size(); i++) {
+                a[i] = integerList.get(i);
+            }
+            int[] result = dailyTemperatures.dailyTemperatures(a);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }
