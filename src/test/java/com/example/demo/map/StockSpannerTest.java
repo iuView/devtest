@@ -8,10 +8,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class StockSpannerTest {
 
-    StockSpanner stockSpanner = new StockSpanner();
-    
+
     @Test
     void next() {
+        StockSpanner stockSpanner = new StockSpanner();
         int result = stockSpanner.next(100); // return 1
         assertThat(result).isEqualTo(1);
         result = stockSpanner.next(80);  // return 1
@@ -31,5 +31,65 @@ class StockSpannerTest {
         result = stockSpanner.next(85);  // return 6
         assertThat(result).isEqualTo(6);
 
+    }
+
+    @Test
+    void next2() {
+        StockSpanner stockSpanner = new StockSpanner();
+        int result = stockSpanner.next(73);
+        assertThat(result).isEqualTo(1);
+        result = stockSpanner.next(97);
+        assertThat(result).isEqualTo(2);
+        result = stockSpanner.next(35);
+        assertThat(result).isEqualTo(1);
+
+        result = stockSpanner.next(45);
+        assertThat(result).isEqualTo(2);
+
+        result = stockSpanner.next(73);
+        assertThat(result).isEqualTo(3);
+
+        result = stockSpanner.next(66);
+        assertThat(result).isEqualTo(1);
+
+        result = stockSpanner.next(27);
+        assertThat(result).isEqualTo(1);
+
+        // continue
+        result = stockSpanner.next(68);
+        assertThat(result).isEqualTo(3);
+        result = stockSpanner.next(31);
+        assertThat(result).isEqualTo(1);
+
+        result = stockSpanner.next(36);
+        assertThat(result).isEqualTo(2);
+
+        result = stockSpanner.next(54);
+        assertThat(result).isEqualTo(3);
+
+        result = stockSpanner.next(74);
+        assertThat(result).isEqualTo(10);
+
+        result = stockSpanner.next(16);
+        assertThat(result).isEqualTo(1);
+
+        // last set
+        result = stockSpanner.next(3);
+        assertThat(result).isEqualTo(1);
+        result = stockSpanner.next(63);
+        assertThat(result).isEqualTo(3);
+        result = stockSpanner.next(3);
+        assertThat(result).isEqualTo(1);
+
+        result = stockSpanner.next(5);
+        assertThat(result).isEqualTo(2);
+
+        result = stockSpanner.next(23);
+        assertThat(result).isEqualTo(3);
+
+        result = stockSpanner.next(66);
+        assertThat(result).isEqualTo(7);
+        result = stockSpanner.next(7);
+        assertThat(result).isEqualTo(1);
     }
 }
