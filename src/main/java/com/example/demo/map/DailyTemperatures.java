@@ -3,7 +3,7 @@ package com.example.demo.map;
 import java.util.*;
 
 /**
- * https://leetcode.com/problems/daily-temperatures/description/
+ * <a href="https://leetcode.com/problems/daily-temperatures/description/">...</a>
  * this should have been done in PriorityQueues (heaps)
  */
 public class DailyTemperatures {
