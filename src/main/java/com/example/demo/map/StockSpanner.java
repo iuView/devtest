@@ -7,7 +7,9 @@ import java.util.stream.Collectors;
  * <a href="https://leetcode.com/problems/online-stock-span/">leetcode</a>
  * looks like the TreeMap approach is not the best,
  * should use a stack to pop things off the list. it is quite better than this.
- * will have to work on it next. will get rid of most of the code
+ * will have to work on it next. will get rid of most of the code.
+ * second problem: when the input is crazy, with a lot of items, a lot of duplicates etc
+ * this will time limit
  */
 public class StockSpanner {
     Deque<Integer> stack = new LinkedList<>();

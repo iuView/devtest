@@ -115,4 +115,20 @@ class StockSpannerTest {
         assertThat(result).isEqualTo(6);
 
     }
+
+    @Test
+    void nextInsaneTestCase() {
+        StockSpanner stockSpanner = new StockSpanner();
+        int result = stockSpanner.next(1);
+        assertThat(result).isEqualTo(1);
+
+        result = stockSpanner.next(1);
+        assertThat(result).isEqualTo(2);
+
+        result = stockSpanner.next(1);
+        assertThat(result).isEqualTo(3);
+
+        result = stockSpanner.next(1);
+        assertThat(result).isEqualTo(4);
+    }
 }
