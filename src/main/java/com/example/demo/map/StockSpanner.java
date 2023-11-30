@@ -35,7 +35,6 @@ public class StockSpanner {
 //                    return o1.compareTo(o2);
 //                }
 //            };
-            TreeSet<Integer> allSets = new TreeSet<>();
             List<Integer> allvals = submap.values().stream().flatMap(TreeSet::stream).collect(Collectors.toList());
             // need to find the continues ones, starting from the least index
 
