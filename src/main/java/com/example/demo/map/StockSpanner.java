@@ -11,7 +11,7 @@ public class StockSpanner {
 
     // need a hashmap to remember when the last time certain price occurred
     // also it should sort the map key, so the search time is log(n) time
-    TreeMap<Integer, Set<Integer>> map = new TreeMap<>();
+    TreeMap<Integer, TreeSet<Integer>> map = new TreeMap<>();
 
     public StockSpanner() {
 
@@ -22,30 +22,39 @@ public class StockSpanner {
         // now find:
         int newprice = price + 1;
         int space = Integer.MIN_VALUE;
-        Map<Integer, Set<Integer>> submap = map.headMap(newprice);
+        Map<Integer, TreeSet<Integer>> submap = map.headMap(newprice);
+        Map<Integer, TreeSet<Integer>> tailmap = map.tailMap(newprice);
         // need to make sure the values are continuous
         if (!submap.isEmpty()) {
             // need to combine all the numbers in set:
-            Comparator<? super Integer> comparator = new Comparator<Integer>() {
-                @Override
-                public int compare(Integer o1, Integer o2) {
-                    return o1.compareTo(o2);
-                }
-            };
-            List<Integer> allvals = submap.values().stream().flatMap(Set::stream).sorted(comparator).collect(Collectors.toList());
-            Iterator<Integer> iterator = allvals.iterator();
-            // need to find the continues ones, starting from the largest index
 
-            int minindex = allvals.stream().findFirst().get();
-            int i = currentposition - 1;
-            for (; i >= minindex; i--) {
-                if (allvals.contains(i)) {
-                    continue;
-                } else {
-                    break;
+            // todo: if the set is TreeSet then maybe we don't need to sort it like this:
+//            Comparator<? super Integer> comparator = new Comparator<Integer>() {
+//                @Override
+//                public int compare(Integer o1, Integer o2) {
+//                    return o1.compareTo(o2);
+//                }
+//            };
+            TreeSet<Integer> allSets = new TreeSet<>();
+            List<Integer> allvals = submap.values().stream().flatMap(TreeSet::stream).collect(Collectors.toList());
+            // need to find the continues ones, starting from the least index
+
+            int minindex = allvals.stream().sorted().findFirst().get();
+
+            if (tailmap.isEmpty()) {
+                // all are smaller, so no big deal
+                space = currentposition - minindex;
+            } else {
+                int i = currentposition - 1;
+                for (; i >= minindex; i--) {
+                    if (allvals.contains(i)) {
+                        continue;
+                    } else {
+                        break;
+                    }
                 }
+                space = currentposition - 1 - i;
             }
-            space = currentposition - 1 - i;
         }
 
         if (space >= 1)
@@ -55,9 +64,9 @@ public class StockSpanner {
         // tail map and head map may give some clues
 
         // adding this data point:
-        Set<Integer> indexes = map.get(price);
+        TreeSet<Integer> indexes = map.get(price);
         if (indexes == null)
-            indexes = new HashSet<>();
+            indexes = new TreeSet<>();
         indexes.add(currentposition);
         map.put(price, indexes); // the index of it
         currentposition++;

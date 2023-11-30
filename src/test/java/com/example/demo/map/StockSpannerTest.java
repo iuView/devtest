@@ -92,4 +92,30 @@ class StockSpannerTest {
         result = stockSpanner.next(7);
         assertThat(result).isEqualTo(1);
     }
+
+    @Test
+    void nextWorstCase() {
+        // the numbers are all increasing.
+        // when this happens there is an inefficiency shows up
+        StockSpanner stockSpanner = new StockSpanner();
+        int result = stockSpanner.next(10); // return 1
+        assertThat(result).isEqualTo(1);
+        result = stockSpanner.next(20);  // return 2
+        assertThat(result).isEqualTo(2);
+        result = stockSpanner.next(30);
+        assertThat(result).isEqualTo(3);
+
+        result = stockSpanner.next(40);
+        assertThat(result).isEqualTo(4);
+
+        result = stockSpanner.next(50);
+        assertThat(result).isEqualTo(5);
+
+        result = stockSpanner.next(60);
+        assertThat(result).isEqualTo(6);
+
+        result = stockSpanner.next(70);
+        assertThat(result).isEqualTo(7);
+
+    }
 }
