@@ -1,12 +1,70 @@
 package com.example.demo;
 
-import java.util.Deque;
-import java.util.LinkedList;
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
+import java.util.*;
 
 /**
  * sick and tired of creating single classes
  */
 public class LeetCodeRandom {
+
+    /**
+     * another tricky problem that could have an impact on your problem solving skills:
+     * the unit test has the specs
+     * so basically give me a true or false answer based on if any of two numbers in the
+     * array has this logic:
+     * a^2 + b^2 = c^2
+     *
+     * @param listOfInts
+     * @return
+     */
+    public boolean giveMeTheSquares(int[] listOfInts) {
+        boolean retval = false;
+        // first square everything:
+        List<Integer> sqvals = preProcess(listOfInts);
+
+        for (int i = 0; i < sqvals.size(); i++) {
+            int val = sqvals.get(i);
+            int start = i + 1;
+            int end = sqvals.size() - 1;
+
+            retval = findIt(sqvals, val, start, end);
+            if (retval)
+                return true;
+        }
+
+        return retval;
+    }
+
+    // find two numbers that add up equal to 'val', start and end are inclusive indexes
+    // list is sorted descending
+    // all are positive numbers
+    // this sounds like a leetcode question https://leetcode.com/problems/sum-of-square-numbers/description/
+    boolean findIt(List<Integer> list, int val, int start, int end) {
+        boolean retval = false;
+        if (start >= end)
+            return false;
+        // todo:
+        return retval;
+    }
+
+    private List<Integer> preProcess(int[] listOfInts) {
+        List<Integer> retval = new ArrayList<>(listOfInts.length);
+        for (int i = 0; i < listOfInts.length; i++) {
+            retval.add((int) Math.pow(listOfInts[i], 2));
+        }
+        Comparator<? super Integer> comparator = new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o2.compareTo(o1);
+            }
+        };
+        Collections.sort(retval, comparator);
+        System.out.println(retval.toString());
+        return retval;
+    }
+
+
     public int[] asteroidCollision(int[] asteroids) {
         Deque<Integer> stack = new LinkedList<>();
         stack.push(asteroids[0]);
@@ -44,30 +102,7 @@ public class LeetCodeRandom {
                 if (!hadColission)
                     break;
                 return asteroidCollision(getInts(stack));
-//                int item = stack.pop();
-//
-//                if (stack.isEmpty()) {
-//                    stack.push(item);
-//                } else {
-//                    int val = stack.peek();
-//                    if ((item > 0 && val > 0) || (item < 0 && val < 0)) {
-//                        // same direction
-//                        stack.push(item);
-//                    } else if ((item > 0 && val < 0)) {
-//                        stack.push(item);
-//                    } else {
-//                        if (Math.abs(item) > Math.abs(val)) {
-//                            stack.pop();
-//                            stack.push(item);
-//                        } else if (Math.abs(item) == Math.abs(val)) {
-//                            stack.pop();
-//                        } else {
-//                            ;
-//                        }
-//                    }
-//                }
-//
-//                break;
+
             }
 
         }
