@@ -10,8 +10,23 @@ public class SumOfSquareNumbers {
 
         System.out.printf("squireroot of %d is: %f and %d\n", c, Math.sqrt(c), csqrt);
 
+
         int end = csqrt;
         int start = 0;
+        while (start <= end) {
+            boolean innerreturn = innerLoop(c, start, end);
+            if (!innerreturn) {
+                start = start + 1;
+                end = end - 1;
+            } else {
+                return true;
+            }
+        }
+
+        return retval;
+    }
+
+    private static boolean innerLoop(int c, int start, int end) {
         while (start <= end) {
             if (Math.pow(start, 2) + Math.pow(end, 2) == c) {
                 return true;
@@ -19,6 +34,16 @@ public class SumOfSquareNumbers {
                 start = start + 1;
             }
         }
-        return retval;
+
+        // going backwards:
+        start = 1;
+        while (start <= end) {
+            if (Math.pow(start, 2) + Math.pow(end, 2) == c) {
+                return true;
+            } else {
+                end = end - 1;
+            }
+        }
+        return false;
     }
 }
