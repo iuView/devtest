@@ -28,8 +28,11 @@ class SumOfSquareNumbersTest {
 
         result = sumOfSquareNumbers.judgeSquareSum(1000);
         assertThat(result).isTrue();
-        
+
         result = sumOfSquareNumbers.judgeSquareSum(2147482647);
+        assertThat(result).isFalse();
+
+        result = sumOfSquareNumbers.judgeSquareSum(999999999);
         assertThat(result).isFalse();
     }
 }
