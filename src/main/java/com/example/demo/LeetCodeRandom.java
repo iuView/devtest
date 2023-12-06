@@ -8,6 +8,51 @@ import java.util.*;
  */
 public class LeetCodeRandom {
 
+    // here is another thing I don't know where to put, from leetcode
+
+    /**
+     * <a href="https://leetcode.com/problems/smallest-value-after-replacing-with-sum-of-prime-factors/">question</a>
+     * the core of this problem is to understand what the hell is prime factors of a number
+     * by the time I am done with all leetcode all the grade school math would be relearned
+     *
+     * @param n
+     * @return
+     */
+    public int smallestValue(int n) {
+
+        if (n == 4)
+            return 4;
+
+        List<Integer> nums = new ArrayList<>();
+
+        // starting from 2 to the number itself
+        int nextPrime = 1;
+        int startnum = n;
+        while (startnum > 1) {
+            nextPrime = getNextPrime(startnum);
+            startnum = startnum / nextPrime;
+            nums.add(nextPrime);
+        }
+
+        // call smallestValue again with nums sum together
+        // check end condition in order to exit the recursion
+        if (nums.size() == 1)
+            return nums.get(0);
+        else
+            return smallestValue(nums.stream().mapToInt(x -> x).sum());
+
+    }
+
+    private int getNextPrime(int n) {
+        // this only returns the first prime
+        for (int i = 2; i <= n; i++) {
+            if (n % i == 0) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
     /**
      * another tricky problem that could have an impact on your problem solving skills:
      * the unit test has the specs
@@ -122,4 +167,6 @@ public class LeetCodeRandom {
         }
         return retval;
     }
+
+
 }

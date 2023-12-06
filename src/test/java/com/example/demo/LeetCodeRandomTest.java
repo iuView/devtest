@@ -32,4 +32,17 @@ class LeetCodeRandomTest {
         assertThat(result).isFalse();
 
     }
+
+    @Test
+    void smallestValue() {
+        LeetCodeRandom leetCodeRandom = new LeetCodeRandom();
+        int result = leetCodeRandom.smallestValue(15);
+        assertThat(result).isEqualTo(5);
+
+        result = leetCodeRandom.smallestValue(3);
+        assertThat(result).isEqualTo(3);
+
+        result = leetCodeRandom.smallestValue(4);
+        assertThat(result).isEqualTo(4);
+    }
 }
