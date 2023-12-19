@@ -2,6 +2,8 @@ package com.example.demo;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.EnumSet;
+
 import static org.assertj.core.api.Assertions.*;
 
 class LeetCodeRandomTest {
@@ -43,6 +45,30 @@ class LeetCodeRandomTest {
         assertThat(result).isEqualTo(3);
 
         result = leetCodeRandom.smallestValue(4);
+        assertThat(result).isEqualTo(4);
+    }
+
+    @Test
+    void distinctPrimeFactorsBasic() {
+        LeetCodeRandom leetCodeRandom = new LeetCodeRandom();
+        int[] nums = {2, 5};
+        int result = leetCodeRandom.distinctPrimeFactors(nums);
+        assertThat(result).isEqualTo(2);
+    }
+
+    @Test
+    void distinctPrimeFactorsSpecial() {
+        LeetCodeRandom leetCodeRandom = new LeetCodeRandom();
+        int[] nums = {30};
+        int result = leetCodeRandom.distinctPrimeFactors(nums);
+        assertThat(result).isEqualTo(3);
+    }
+
+    @Test
+    void distinctPrimeFactors() {
+        LeetCodeRandom leetCodeRandom = new LeetCodeRandom();
+        int[] nums = {2, 4, 3, 7, 10, 6};
+        int result = leetCodeRandom.distinctPrimeFactors(nums);
         assertThat(result).isEqualTo(4);
     }
 }

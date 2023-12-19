@@ -8,7 +8,43 @@ import java.util.*;
  */
 public class LeetCodeRandom {
 
-    // here is another thing I don't know where to put, from leetcode
+    /**
+     * <a href="https://leetcode.com/problems/distinct-prime-factors-of-product-of-array/">leetcode-problem</a>
+     *
+     * @param nums
+     * @return
+     */
+    public int distinctPrimeFactors(int[] nums) {
+
+        Set<Integer> factors = new HashSet<>();
+
+        for (int i = 0; i < nums.length; i++) {
+            storeFactors(factors, nums[i]);
+        }
+
+        return factors.size();
+    }
+
+    private void storeFactors(Set<Integer> factors, int n) {
+        int nextPrime = getNextPrime(n);
+
+        int val = n;
+        while (nextPrime != -1) {
+            factors.add(nextPrime);
+            val = val / nextPrime;
+            nextPrime = getNextPrime(val);
+        }
+    }
+
+    private int getNextPrime(int n) {
+        // this only returns the first prime
+        for (int i = 2; i <= n; i++) {
+            if (n % i == 0) {
+                return i;
+            }
+        }
+        return -1;
+    }
 
     /**
      * <a href="https://leetcode.com/problems/smallest-value-after-replacing-with-sum-of-prime-factors/">question</a>
@@ -43,15 +79,6 @@ public class LeetCodeRandom {
 
     }
 
-    private int getNextPrime(int n) {
-        // this only returns the first prime
-        for (int i = 2; i <= n; i++) {
-            if (n % i == 0) {
-                return i;
-            }
-        }
-        return -1;
-    }
 
     /**
      * another tricky problem that could have an impact on your problem solving skills:
