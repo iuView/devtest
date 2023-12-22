@@ -8,6 +8,103 @@ import java.util.*;
  */
 public class LeetCodeRandom {
 
+    List<Integer> primes = Arrays.asList(2, 3, 5, 7, 11, 13, 17, 19, 23, 29);
+
+    /**
+     * <a href="https://leetcode.com/problems/count-the-number-of-square-free-subsets/">question</a>
+     *
+     * @param nums
+     * @return
+     */
+
+    public int squareFreeSubsets(int[] nums) {
+
+        int retval = 0;
+
+        Map<Integer, List<Integer>> map = new HashMap<>();
+
+        // the first hint
+        // the nums[i] are less than 30
+        // these are the 10 primes:
+        // 2, 3, 5, 7, 11, 13, 17, 19, 23, 29
+        // hint 2:
+        // label them: 0.....9
+        for (int i = 0; i < nums.length; i++) {
+            // 6, 8 cannot be in the same subset because they both have 2 as their dividant
+            int item = nums[i];
+            List<Integer> whichPrimes = findPrime(item);
+            if (whichPrimes.size() > 0)
+                map.put(i, whichPrimes);
+        }
+
+        // for each of the map items we need to find the exclusive ones. I hate this problem set
+        if (map.size() == 0) {
+            retval = 0;
+        } else {
+            System.out.println(map.toString());
+            return processMap(map);
+        }
+        return retval;
+    }
+
+    private int processMap(Map<Integer, List<Integer>> map) {
+        // this problem seems too complex, will start working on
+        // https://leetcode.com/problems/combinations/description/
+        // before attacking this one
+
+        List<List<Integer>> results = new ArrayList<>();
+
+        Iterator<Integer> iterator = map.keySet().iterator();
+        while (iterator.hasNext()) {
+            List<Integer> primes = map.get(iterator.next());
+
+        }
+        return 0;
+    }
+
+    // find whether it divides by a prime, use the index of the prime return them
+    // if the prime is equal to itself then return it as well
+    private List<Integer> findPrime(int val) {
+        List<Integer> myprimes = new ArrayList<>();
+
+        // if the number is aleady containing the double, then don't add it
+        // so it will be skipped! I hate this problem !!!
+        Set<Integer> pvals = new HashSet<>();
+        if (valIsDouble(val, pvals)) {
+            return myprimes;
+        }
+
+        for (int j = 0; j < primes.size(); j++) {
+            if (val % primes.get(j) == 0) {
+                myprimes.add(j);
+            }
+        }
+        return myprimes;
+    }
+
+    private boolean valIsDouble(int val, Set<Integer> pvals) {
+        boolean retval = false;
+
+        for (int j = 0; j < primes.size(); j++) {
+            int p = primes.get(j);
+            if (val % p == 0) {
+                if (pvals.contains(j))
+                    return true;
+                else {
+                    pvals.add(j);
+                    val = val / p;
+                    if (val <= 1)
+                        return retval;
+                    else {
+                        return valIsDouble(val, pvals);
+                    }
+                }
+            }
+        }
+
+        return retval;
+    }
+
     /**
      * <a href="https://leetcode.com/problems/distinct-prime-factors-of-product-of-array/">leetcode-problem</a>
      *

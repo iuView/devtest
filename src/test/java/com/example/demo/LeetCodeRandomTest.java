@@ -71,4 +71,28 @@ class LeetCodeRandomTest {
         int result = leetCodeRandom.distinctPrimeFactors(nums);
         assertThat(result).isEqualTo(4);
     }
+
+    @Test
+    void squareFreeSubsets() {
+        LeetCodeRandom leetCodeRandom = new LeetCodeRandom();
+        int[] nums = {3, 4, 4, 5};
+        int result = leetCodeRandom.squareFreeSubsets(nums);
+        assertThat(result).isEqualTo(3);
+    }
+
+    @Test
+    void squareFreeSubsets2() {
+        LeetCodeRandom leetCodeRandom = new LeetCodeRandom();
+        int[] nums = {3, 4, 4, 5, 22};
+        int result = leetCodeRandom.squareFreeSubsets(nums);
+        assertThat(result).isEqualTo(6);
+    }
+
+    @Test
+    void squareFreeSubsetsOneItem() {
+        LeetCodeRandom leetCodeRandom = new LeetCodeRandom();
+        int[] nums = {22};
+        int result = leetCodeRandom.squareFreeSubsets(nums);
+        assertThat(result).isEqualTo(1);
+    }
 }
