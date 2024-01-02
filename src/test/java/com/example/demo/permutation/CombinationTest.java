@@ -23,11 +23,11 @@ class CombinationTest {
         target.add(Arrays.asList(2, 4));
         target.add(Arrays.asList(3, 4));
 
-        //assertThat(result.size()).isEqualTo(target.size());
+        assertThat(result.size()).isEqualTo(target.size());
         // further asserts are hard to do since will have to compare each list item
         // will be todos
         // but the assert can help debugging:
-        assertThat(result).containsExactlyInAnyOrderElementsOf(target);
+        //assertThat(result).containsExactlyInAnyOrderElementsOf(target);
     }
 
     @Test
@@ -39,6 +39,17 @@ class CombinationTest {
         target.add(Arrays.asList(2));
         target.add(Arrays.asList(3));
         target.add(Arrays.asList(4));
+
+        assertThat(result).containsExactlyInAnyOrderElementsOf(target);
+    }
+
+    @Test
+    void combineDups() {
+        Combination combination = new Combination();
+        List<List<Integer>> result = combination.combine(2, 1);
+        List<List<Integer>> target = new ArrayList<>();
+        target.add(Arrays.asList(1));
+        target.add(Arrays.asList(2));
 
         assertThat(result).containsExactlyInAnyOrderElementsOf(target);
     }

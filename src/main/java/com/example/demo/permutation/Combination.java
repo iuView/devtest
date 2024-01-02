@@ -10,8 +10,8 @@ import java.util.stream.IntStream;
 public class Combination {
 
     public List<List<Integer>> combine(int n, int k) {
-        List<List<Integer>> retval = new ArrayList<>();
-
+        //List<List<Integer>> retval = new ArrayList<>();
+        ReturnClass retval = new ReturnClass();
 
         Set<Integer> numbers = IntStream.range(1, n + 1).mapToObj(x -> x).collect(Collectors.toSet());
 
@@ -19,6 +19,7 @@ public class Combination {
 
         while (iterCounter >= 0) {
             List<List<Integer>> temp = new ArrayList<>();
+
             retval.addAll(addToList(temp, numbers, k));
 
             iterCounter--;
@@ -26,7 +27,7 @@ public class Combination {
                 numbers.remove(k - iterCounter);
             }
         }
-        return retval;
+        return retval.getMyList();
     }
 
     private List<List<Integer>> addToList(List<List<Integer>> list, Set<Integer> numbers, int k) {
@@ -60,5 +61,34 @@ public class Combination {
         }
 
         return list;
+    }
+}
+
+class ReturnClass {
+    List<List<Integer>> myList = new ArrayList<>();
+
+    public ReturnClass() {
+
+    }
+
+    public void addAll(List<List<Integer>> toAdd) {
+        for (int i = 0; i < toAdd.size(); i++) {
+            List<Integer> item = toAdd.get(i);
+            boolean found = false;
+            for (int j = 0; j < myList.size(); j++) {
+                List<Integer> inner = myList.get(j);
+                if (inner.equals(item)) {
+                    found = true;
+                    break;
+                }
+            }
+            if (found)
+                continue;
+            myList.add(item);
+        }
+    }
+
+    public List<List<Integer>> getMyList() {
+        return myList;
     }
 }
