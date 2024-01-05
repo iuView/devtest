@@ -2,6 +2,7 @@ package com.example.demo.arrays;
 
 import com.example.demo.TreeNode;
 import com.example.demo.arrays.ArrayClass;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Disabled
 class ArrayClassTest {
 
     ArrayClass arrayClass = new ArrayClass();

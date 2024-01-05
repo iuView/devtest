@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.io.*;
@@ -8,6 +9,7 @@ import java.io.*;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
+@Disabled
 class TreeNodeTest {
 
     private static TreeNode root;

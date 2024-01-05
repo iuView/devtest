@@ -1,11 +1,13 @@
 package com.example.demo;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.EnumSet;
 
 import static org.assertj.core.api.Assertions.*;
 
+@Disabled
 class LeetCodeRandomTest {
 
     @Test

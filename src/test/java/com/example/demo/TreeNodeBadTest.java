@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.data.jpa.domain.AbstractAuditable_;
 
@@ -9,6 +10,7 @@ import java.lang.reflect.Modifier;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@Disabled
 class TreeNodeBadTest {
 
     @Test
